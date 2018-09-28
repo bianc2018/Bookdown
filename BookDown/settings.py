@@ -14,8 +14,18 @@
 # items 中图片的url
 FILES_URLS_FIELD = 'URL'
 # .代表当前路径
-FILES_STORE = './Books'
+FILES_STORE = r'D:\ftp\Books'
+"""
+[twisted] CRITICAL: Unhandled error in Deferred:
+代码中涉及到路径的引用也会产生这个问题的。
+建议在涉及到路径的引用时，都加上“r”操作符。这样就不会出现问题了
+"""
 #用户数据
+#书本大小范围 KB
+MINBOOKSIZE = 0.0
+MAXBOOKSIZE = 1000000.0
+#爬取的书本类型
+BOOK_CLASS = ['科幻灵异','游戏竞技','玄幻奇幻','现代都市','最新全本']
 
 
 BOT_NAME = 'BookDown'

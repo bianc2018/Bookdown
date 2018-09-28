@@ -102,6 +102,7 @@ class BookdownDownloaderMiddleware(object):
     def spider_opened(self, spider):
         spider.logger.info('Spider opened: %s' % spider.name)
 
+#随机设定请求头部信息
 from fake_useragent import FakeUserAgent
 import  random
 class AgentandProxy(object):

@@ -7,7 +7,7 @@
 
 import scrapy
 
-
+#重载文件项
 class File(scrapy.Item):
     # define the fields for your item here like:
     URL = scrapy.Field()
