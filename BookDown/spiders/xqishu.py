@@ -18,8 +18,10 @@ class Spider(scrapy.Spider):
     #访问首页
     def start_requests(self):
         self.lists = []
-        #print(self.settings)
+        print("爬取的小说类型：",self.settings['BOOK_CLASS'])
+        print(f"爬取的小说大小[{self.settings['MINBOOKSIZE']} KB - {self.settings['MAXBOOKSIZE']} KB ]")
         yield Request(self.start_urls,self.indexParse)
+
     #获取分析首页信息，并请求分类页面
     def indexParse(self,response):
         book_class = response.xpath("//div[@class='menu']/a")[1:-1] #获取分类页：最新、玄幻。。。。
@@ -27,8 +29,8 @@ class Spider(scrapy.Spider):
         for bc in book_class:
             cl = bc.xpath("./text()").extract()[0]
             #不是要获取的类型忽略
-            #if cl not in  self.settings['BOOK_CLASS']:
-            #    continue
+            if cl not in  self.settings['BOOK_CLASS']:
+                continue
             url = self.baseurl+bc.xpath("./@href").extract()[0]
             meta = {'class': cl} #发起请求，并记录分类
             yield Request(url,callback=self.pageParse,meta=meta)
@@ -58,15 +60,19 @@ class Spider(scrapy.Spider):
             cl = response.meta['class']
             if len(response.text) == 0:
                 return
+
+			#获取下载链接
+            url = response.xpath("//a[@class='bdbtn greenBtn']/@href").extract()[0]
             #获取大小
             sizestr = response.xpath("//span[@class='num']/text()").extract()[0]
             size = float(sizestr[:-2])
             if 'MB' in sizestr or 'Mb' in sizestr or 'mB' in sizestr or 'mb' in sizestr:
-                size = 1024
+                size = 1024*size
             #大小不符合不下载
-            #if size<float(self.settings['MINBOOKSIZE']) or size>float(self.settings['MAXBOOKSIZE']):
-            #    return
-
+            if size<float(self.settings['MINBOOKSIZE']) or size>float(self.settings['MAXBOOKSIZE']):
+                print(f"丢弃item {url.split('/')[-1]}，原因：大小[{size} KB]太小")
+                return
+            print(f"获得 item {url.split('/')[-1]}，大小：[{sizestr}")
             #获取标题
             title = response.xpath("//h1[@class='title']/text()").extract()[0]
 
@@ -76,8 +82,7 @@ class Spider(scrapy.Spider):
             #rar['PATH'] = cl+'/'+title+'/'+url.split('/')[-1]
             #rar['URL'] = [url]
 
-            #获取下载链接
-            url = response.xpath("//a[@class='bdbtn greenBtn']/@href").extract()[0]
+            
             txt = File()
             txt['PATH'] = cl +"/"+ sizestr+"_"+url.split('/')[-1] #生成文件名 小说类型/大小_小说名称
             txt['URL'] = [url]

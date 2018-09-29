@@ -22,11 +22,13 @@ FILES_STORE = r'D:\ftp\Books'
 """
 #用户数据
 #书本大小范围 KB
-MINBOOKSIZE = 0.0
+MINBOOKSIZE = 3.0*1024
 MAXBOOKSIZE = 1000000.0
 #爬取的书本类型
 BOOK_CLASS = ['科幻灵异','游戏竞技','玄幻奇幻','现代都市','最新全本']
 
+#断点续传功能
+#JOBDIR='XQISHU.com'
 
 BOT_NAME = 'BookDown'
 
