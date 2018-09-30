@@ -28,7 +28,11 @@ MAXBOOKSIZE = 1000000.0
 BOOK_CLASS = ['科幻灵异','游戏竞技','玄幻奇幻','现代都市','最新全本']
 
 #断点续传功能
-#JOBDIR='XQISHU.com'
+CACHE_LOG = r"./log"
+#logging
+LOG_FILE = "xqishu.log"
+LOG_LEVEL = "INFO"
+LOG_STDOUT = True
 
 BOT_NAME = 'BookDown'
 
