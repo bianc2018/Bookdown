@@ -25,14 +25,13 @@ FILES_STORE = r'D:\ftp\Books'
 MINBOOKSIZE = 3.0*1024
 MAXBOOKSIZE = 1000000.0
 #爬取的书本类型
-BOOK_CLASS = ['科幻灵异','游戏竞技','玄幻奇幻','现代都市','最新全本']
-
-#断点续传功能
-CACHE_LOG = r"./log"
+#BOOK_CLASS = ['科幻灵异','游戏竞技','玄幻奇幻','现代都市','最新全本']
+BOOK_CLASS = ['最新全本']
+import datetime
 #logging
-LOG_FILE = "xqishu.log"
+LOG_FILE = datetime.datetime.now().strftime(r"./log/xqishu_%Y_%m_%d_%H_%M_%S.log")
 LOG_LEVEL = "INFO"
-LOG_STDOUT = True
+#LOG_STDOUT = True
 
 BOT_NAME = 'BookDown'
 
