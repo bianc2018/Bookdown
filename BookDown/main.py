@@ -6,4 +6,4 @@
 """
 
 from scrapy import cmdline
-cmdline.execute("scrapy crawl xqishu".split())
+cmdline.execute("scrapy crawl aihu99".split())

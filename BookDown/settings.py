@@ -26,10 +26,11 @@ MINBOOKSIZE = 3.0*1024
 MAXBOOKSIZE = 1000000.0
 #爬取的书本类型
 #BOOK_CLASS = ['科幻灵异','游戏竞技','玄幻奇幻','现代都市','最新全本']
-BOOK_CLASS = ['最新全本']
+BOOK_CLASS = ['最近更新']
 import datetime
 #logging
 LOG_FILE = datetime.datetime.now().strftime(r"./log/xqishu_%Y_%m_%d_%H_%M_%S.log")
+UPDATA_FILE = "./log/up"
 LOG_LEVEL = "INFO"
 #LOG_STDOUT = True
 
